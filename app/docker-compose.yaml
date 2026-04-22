@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  weather-service:
+    build: ./weather-service
+    container_name: weather-service
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-q0-", "https://localhost:3001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  quote-service:
+    build: ./quote-service
+    container_name: quote-service
+    ports:
+      - "3002:3002"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    healthcheck: 
+      test: ["CMD", "wget", "-q0-", "https://localhost:3002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: api-gateway
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - WEATHER_SERVICE_URL=http://weather-service:3001
+      - QUOTE_SERVICE_URL=http://quote-service:3002
+    depends_on:
+      weather-service:
+        condition: service_healthy
+      quote-service:
+        condition: service_healthy
+    restart: unless-stopped
+    
