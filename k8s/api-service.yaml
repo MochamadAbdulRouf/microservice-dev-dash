@@ -9,42 +9,42 @@ spec:
   selector:
     matchLabels:
       app: api-service
-    template:
-      metadata:
-        labels:
-          app: api-service
-      spec:
-        containers:
-          - name: api-gateway
-            image: mochabdulrouf/api-gateway
-            ports:
-              - containerPort: 3000
-            env:
-              - name: NODE_ENV
-                value: "production"
-              - name: WEATHER_SERVICE_URL
-                value: "http://weather-service:3001"
-              - name: QUOTE_SERVICE_URL
-                value: "http://quote-service:3002"
-            resources:
-              requests:
-                memory: "64Mi"
-                cpu: "100m"
-              limits:
-                memory: "128Mi"
-                cpu: "200m"
-            livenessProbe:
-              httpGet:
-                path: /health
-                port: 3000
-              initialDelaySeconds: 10
-              periodSeconds: 15
-            readinessProbe:
-              httpGet:
-                path: /health
-                port: 3000
-              initialDelaySeconds: 5
-              periodSeconds: 10
+  template:
+    metadata:
+      labels:
+        app: api-service
+    spec:
+      containers:
+        - name: api-gateway
+          image: mochabdulrouf/api-gateway
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: WEATHER_SERVICE_URL
+              value: "http://weather-service:3001"
+            - name: QUOTE_SERVICE_URL
+              value: "http://quote-service:3002"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 10
+            periodSeconds: 15
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
 
 ---
 
