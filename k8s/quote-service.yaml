@@ -18,10 +18,10 @@ spec:
       - name: quote-service
         image: mochabdulrouf/quote-sevice:latest
         ports:
-          - containerPort: 3002
+        - containerPort: 3002
         env:
-          - name: NODE_ENV
-            value: "production"
+        - name: NODE_ENV
+          value: "production"
         resources:
           requests:
             memory: "64Mi"
@@ -39,7 +39,7 @@ spec:
           httpGet:
             path: /health
             port: 3002
-          initialDelaySecons: 5
+          initialDelaySeconds: 5
           periodSeconds: 10
 
 ---
