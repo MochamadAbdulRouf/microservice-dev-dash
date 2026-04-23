@@ -5,7 +5,7 @@ metadata:
   labels:
     app: weather-service
 spec:
-  repliocas: 2
+  replicas: 2
   selector:
     matchLabels:
       app: weather-service
@@ -45,7 +45,7 @@ spec:
 ---
 
 apiVersion: v1
-kind: service
+kind: Service
 metadata:
   name: weather-service
 spec:
