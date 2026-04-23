@@ -9,38 +9,38 @@ spec:
   selector:
     matchLabels:
       app: quote-service
-    template:
-      metadata:
-        labels:
-          app: quote-service
-      spec:
-        containers:
-        - name: quote-service
-          image: mochabdulrouf/quote-sevice:latest
-          ports:
-            - containerPort: 3002
-          env:
-            - name: NODE_ENV
-              value: "production"
-          resources:
-            requests:
-              memory: "64Mi"
-              cpu: "100m"
-            limits:
-              memory: "128Mi"
-              cpu: "200m"
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: 3002
-            initialDelaySeconds: 10
-            periodSeconds: 15
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: 3002
-            initialDelaySecons: 5
-            periodSeconds: 10
+  template:
+    metadata:
+      labels:
+        app: quote-service
+    spec:
+      containers:
+      - name: quote-service
+        image: mochabdulrouf/quote-sevice:latest
+        ports:
+          - containerPort: 3002
+        env:
+          - name: NODE_ENV
+            value: "production"
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "100m"
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3002
+          initialDelaySeconds: 10
+          periodSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3002
+          initialDelaySecons: 5
+          periodSeconds: 10
 
 ---
 
