@@ -7,3 +7,5 @@ docker inspect --format="{{json .State.Health}}" weather-service
 fix:
 - typo pada isi docker compose ["CMD", "wget", "-q0-", "http://localhost:3001/health"]
 - fix: ["CMD", "wget", "-qO-", "http://localhost:3001/health"]
+
+2. 
