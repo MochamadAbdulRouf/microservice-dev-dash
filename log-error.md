@@ -34,3 +34,6 @@ kubectl set image deployment/weather-service \
 ```bash
 kubectl rollout undo deployment/weather-service
 ```
+
+2. Log error Some specified paths were not resolved, unable to cache dependencies.
+- troubleshoot fix, cek di folder `./app`, karena di workflow telah definisikan dengan fitur matrix, cek masing masing folder mempunyai package-lock.json atau package.json .

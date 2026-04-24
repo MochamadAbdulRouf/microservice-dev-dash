@@ -1,1 +1,4 @@
 .env
+/app/api-gateway/node_modules
+/app/quote-service/node_modules
+/app/weather-service/node_modules
