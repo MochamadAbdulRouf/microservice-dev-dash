@@ -9,12 +9,28 @@ const PORT = 3000;
 const WEATHER_URL = process.env.WEATHER_SERVICE_URL || 'http://weather-service:3001';
 const QUOTE_URL   = process.env.QUOTE_SERVICE_URL   || 'http://quote-service:3002';
 
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Welcome to Microservices API Gateway',
+    endpoints: {
+      health: '/health',
+      dashboard: '/dashboard',
+      weather: '/weather',
+      quote: '/quote'
+    }
+  });
+});
+
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', service: 'api-gateway' });
 });
 
 // Endpoint aggregator — memanggil kedua service sekaligus
 app.get('/dashboard', async (req, res) => {
+  console.log('--- Dashboard Request ---');
+  console.log(`Calling Weather Service: ${WEATHER_URL}`);
+  console.log(`Calling Quote Service: ${QUOTE_URL}`);
+
   const lat = req.query.lat || '-7.97';
   const lon = req.query.lon || '112.63';
 
@@ -27,12 +43,12 @@ app.get('/dashboard', async (req, res) => {
     ]);
 
     const weather = weatherResult.status === 'fulfilled'
-      ? weatherResult.value.data
-      : { error: 'Weather service tidak tersedia' };
+      ? (console.log('✅ Weather Service connected successfully'), weatherResult.value.data)
+      : (console.error('❌ Weather Service failed:', weatherResult.reason.message), { error: 'Weather service tidak tersedia' });
 
     const quote = quoteResult.status === 'fulfilled'
-      ? quoteResult.value.data
-      : { error: 'Quote service tidak tersedia' };
+      ? (console.log('✅ Quote Service connected successfully'), quoteResult.value.data)
+      : (console.error('❌ Quote Service failed:', quoteResult.reason.message), { error: 'Quote service tidak tersedia' });
 
     res.json({
       gateway: 'api-gateway',
@@ -41,6 +57,7 @@ app.get('/dashboard', async (req, res) => {
     });
 
   } catch (error) {
+    console.error('CRITICAL: Gateway error', error.message);
     res.status(500).json({ error: 'Gateway error', detail: error.message });
   }
 });

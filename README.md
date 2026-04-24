@@ -19,6 +19,16 @@ curl http://localhost:3000/dashboard
 docker-compose down
 ```
 
+Recreated image dan Deploy container
+```bash
+docker-compose up --build -d
+
+# Bangun ulang image (tanpa menggunakan cache untuk memastikan file index.js yang baru masuk)
+docker-compose build --no-cache
+
+
+```
+
 Sebelum deploy ke kubernetes, push image ke Docker Hub dulu:
 ```bash
 # Build & push weather-service
