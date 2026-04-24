@@ -77,6 +77,7 @@ echo "$(kubectl get node master-node -o jsonpath='{.status.addresses[0].address}
 curl http://devdash.local/dashboard
 ```
 ### Alur Deployment langsung
+```bash
 Developer
    │
    ├── git push
@@ -92,6 +93,6 @@ K8s Scheduler → menempatkan Pod di node yang tepat
    │
    ├── master-node: api-gateway Pod
    └── node-1: weather-service Pod + quote-service Pod
-
+```
 
 ## Pipeline ?
