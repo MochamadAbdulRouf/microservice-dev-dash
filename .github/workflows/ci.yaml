@@ -117,7 +117,7 @@ jobs:
           exit-code: '1'
 
       - name: Upload hasil scan ke Github Security Tab
-        uses: aquasecurit/trivy-action@master
+        uses: aquasecurity/trivy-action@master
         with:
           image-ref: '${{ env.DOCKERHUB_USERNAME }}/${{ matrix.service }}:latest'
           format: 'sarif'
