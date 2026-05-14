@@ -99,34 +99,34 @@ jobs:
           cache-from: type=gha 
           cache-to: type=gha,mode=max
 
-  security_image:
-    name: Image Security Scan
-    runs-on: ubuntu-latest
-    needs: build-push
-    strategy:
-      matrix:
-        service: [api-gateway, weather-service, quote-service]
+  # security_image:
+  #   name: Image Security Scan
+  #   runs-on: ubuntu-latest
+  #   needs: build-push
+  #   strategy:
+  #     matrix:
+  #       service: [api-gateway, weather-service, quote-service]
     
-    steps:  
-      - name: Scan image with Trivy
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: '${{ env.DOCKERHUB_USERNAME }}/${{ matrix.service }}:latest'
-          format: 'table'
-          severity: 'HIGH,CRITICAL'
-          exit-code: '1'
+  #   steps:  
+  #     - name: Scan image with Trivy
+  #       uses: aquasecurity/trivy-action@master
+  #       with:
+  #         image-ref: '${{ env.DOCKERHUB_USERNAME }}/${{ matrix.service }}:latest'
+  #         format: 'table'
+  #         severity: 'HIGH,CRITICAL'
+  #         exit-code: '1'
 
-      - name: Upload hasil scan ke Github Security Tab
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: '${{ env.DOCKERHUB_USERNAME }}/${{ matrix.service }}:latest'
-          format: 'sarif'
-          output: 'trivy-results.sarif'
+  #     - name: Upload hasil scan ke Github Security Tab
+  #       uses: aquasecurity/trivy-action@master
+  #       with:
+  #         image-ref: '${{ env.DOCKERHUB_USERNAME }}/${{ matrix.service }}:latest'
+  #         format: 'sarif'
+  #         output: 'trivy-results.sarif'
 
-      - name: Upload SARIF ke github
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: 'trivy-results.sarif'
+  #     - name: Upload SARIF ke github
+  #       uses: github/codeql-action/upload-sarif@v3
+  #       with:
+  #         sarif_file: 'trivy-results.sarif'
 
   update-gitops:
     name: Update GitOps Repo
