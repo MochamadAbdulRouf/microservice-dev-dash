@@ -105,7 +105,10 @@ K8s Scheduler → menempatkan Pod di node yang tepat
    └── node-1: weather-service Pod + quote-service Pod
 ```
 
-## Pipeline ?
+# Pipeline ?
+
+<b><center>Arsitektur</center>
+![ci/cd-architecture](cicd.png)
 
 
 🗂️ Struktur 2 Repository (GitOps Pattern)
