@@ -8,7 +8,7 @@ on:
 
 env:
   DOCKERHUB_USERNAME: mochabdulrouf
-  GITOPS_REPO: mochabdulrouf/microservice-ci-cd
+  GITOPS_REPO: MochamadAbdulRouf/microservice-ci-cd
 
 jobs:
 
