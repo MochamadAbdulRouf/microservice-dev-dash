@@ -8,7 +8,7 @@ on:
 
 env:
   DOCKERHUB_USERNAME: mochabdulrouf
-  GITOPS_REPO: https://github.com/MochamadAbdulRouf/microservice-gitops.git
+  GITOPS_REPO: MochamadAbdulRouf/microservice-ci-cd
 
 jobs:
 
