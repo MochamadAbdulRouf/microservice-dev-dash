@@ -50,7 +50,7 @@ app.get('/weather', async (req, res) => {
 
   } catch (error) {
     console.error('Weather API error:', error.message);
-    res.status(500).json({ error: 'Gagal mengambil data cuaca', detail: error.message });
+    res.status(500).json({ error: 'Gagal mengambil data cuaca saat ini', detail: error.message });
   }
 });
 
